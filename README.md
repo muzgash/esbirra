@@ -1,6 +1,6 @@
-esbirra
+MARBLES
 =======
 
-**E**lectronic **S**ystem for **Bi**o **R**eactors with **R**aspberryPi and **A**rduino  
+**M**arvellous **A**rduino and **R**aspberryPi **B**ioreactor **L**ight **E**lectronic **S**ystem  
 
 This is a _GerArduino_ Project
