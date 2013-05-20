@@ -11,3 +11,7 @@
 *.lai
 *.la
 *.a
+
+#tempory vim files
+*.swp
+*.swo
