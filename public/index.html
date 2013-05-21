@@ -2,12 +2,12 @@
 
 <head>
 <meta charset="utf-8" />
-<title>Esbirra Softwre</title>
+<title>MARBLES</title>
 <meta name="author" content="Gerardo Gutierrez" />
-<meta name="description" content="Web based Client/Server implementation for the Esbirra system" />
+<meta name="description" content="Web based Client/Server implementation for MARBLES" />
 
 <link rel="stylesheet" href="css/smartphone.css" type="text/css" media="(min-device-width: 320px) and (max-device-width: 764px)">
-<link rel="stylesheet" href="css/esbirra.css" type="text/css" media="screen and (min-device-width: 765px)">
+<link rel="stylesheet" href="css/marbles.css" type="text/css" media="screen and (min-device-width: 765px)">
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -16,18 +16,25 @@
 </head>
 <body>
 
-	<h1 id="title">Esbirra control and monitoring client</h1>
+	<h1 id="title">MARBLES</h1>
 
 	<div id="description">
 	</div>
 
-<div id="circle">
-</div>
 
-<div id="leds">
+<div id="leds-pc">
+<div id="circle"></div>
 <div id="slider-number">0</div>
 <input id="leds-slider" type="range" min="0" max="255" value=0 onchange="brightness('slider')">
-<input id="leds-number" type="number" min="0" max="255" value=0 onchange="brightness('number')" onkeyup="brightness('number')">
+<!--<input id="leds-number" type="number" min="0" max="255" value=0 onchange="brightness('number')" onkeyup="brightness('number')">-->
+</div>
+
+<div id="leds-smartphone">
+<img id="bulb1" src="img/lightbulb-off.png" width="50" alt="Intensity 20%" onclick="bulbs('1')">
+<img id="bulb2" src="img/lightbulb-off.png" width="50" alt="Intensity 40%" onclick="bulbs('2')">
+<img id="bulb3" src="img/lightbulb-off.png" width="50" alt="Intensity 60%" onclick="bulbs('3')">
+<img id="bulb4" src="img/lightbulb-off.png" width="50" alt="Intensity 80%" onclick="bulbs('4')">
+<img id="bulb5" src="img/lightbulb-off.png" width="50" alt="Intensity 100%" onclick="bulbs('5')">
 </div>
 
 <div id="measure">

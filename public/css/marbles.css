@@ -10,7 +10,7 @@ body {
 	height: 20px;
 	border-radius: 50%;
 	position: absolute;
-	left: 12px;
+	left: 15px;
 	top: 80px;
 	z-index: -1;
 }
@@ -18,20 +18,19 @@ body {
 #slider-number {
     color: white;
 	position: absolute;
-	left: 10px;
-	top: 10px;
+	left: 20px;
+	top: 80px;
 }
 
-#leds-slider {
+#leds-pc {
 }
 
-#leds-number {
+#leds-smartphone {
 visibility: hidden;
 }
 
-#leds {
-    color: black;
+#leds-slider {
 	position: absolute;
-	left: 20px;
-	top: 70px;
+	left: 45px;
+	top: 78px;
 }

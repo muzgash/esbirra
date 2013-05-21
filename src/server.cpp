@@ -22,7 +22,7 @@ int main(int argc,char** argv) {
             .portNumber(31416)
 			.serverOwnsSignals(false)
 			.expectSigchld(true)
-			.uriPath("/esbirra"));
+			.uriPath("/marbles"));
 
         while(1){server.runOnce();}
         assert(false);

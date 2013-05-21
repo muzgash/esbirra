@@ -1,20 +1,9 @@
 body {
     /*background-image: url('../img/background.jpg');
 	background-size: 1099px 900px;*/
-	background-color: green;
+	background-color: #00CC33;
 }
 
-
-#circle {
-	background: rgba(150,150,255,1);
-	width: 20px;
-	height: 20px;
-	border-radius: 50%;
-	position: absolute;
-	left: 12px;
-	top: 80px;
-	z-index: -1;
-}
 
 #slider-number {
     visibility: hidden;
@@ -24,16 +13,10 @@ body {
 	top: 10px;
 }
 
-#leds-slider {
+#leds-pc {
     visibility: hidden;
 }
 
-#leds-number {
+#leds-smartphone {
 }
 
-#leds {
-    color: black;
-	position: absolute;
-	left: 20px;
-	top: 70px;
-}

@@ -42,15 +42,15 @@ function request(method) {
 	method_tag.appendChild(params_tag);
 
 	var serial_dom = new XMLSerializer().serializeToString(dom);
-	console.log(serial_dom);
-	xmlhttp.open("POST","http://192.168.0.17/esbirra-server",false);
+	//console.log(serial_dom);
+	xmlhttp.open("POST","http://192.168.0.17/marbles-server",false);
 	xmlhttp.setRequestHeader("Content-Type","text/xml");
 	xmlhttp.upload.addEventListener("error",function(){alert("something went wrong uploading the request");},false);
 	xmlhttp.send(serial_dom);
 
 	if( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
 		var response = new XMLSerializer().serializeToString(xmlhttp.responseXML);
-		console.log(response);
+		//console.log(response);
 
 		//DO SOMETHING WIHT THE INFORMATION
 	}
@@ -79,6 +79,27 @@ function brightness(element) {
 	brightness_value = value;
 	request('brightness');
 	
+}
+
+function bulbs(bulb_number) {
+    image = document.getElementById("bulb"+bulb_number);
+	number=parseInt(bulb_number);
+	if( image.src.match("img/lightbulb-off.png") ) {
+	    for(i=number;i>0;i--) {
+		    image_tmp=document.getElementById("bulb"+i);
+		    image_tmp.src = "img/lightbulb-on.png";
+		}
+		brightness_value = 20*number;
+		request('brightness');
+	}
+	else {
+	    for(i=number;i<=5;i++) {
+		    image_tmp=document.getElementById("bulb"+i);
+	        image_tmp.src = "img/lightbulb-off.png";
+		}
+		brightness_value=20*(number-1);
+		request('brightness');
+	}
 }
 
 function IO() {
