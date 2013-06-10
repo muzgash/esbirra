@@ -4,7 +4,7 @@ body {
 }
 
 
-#circle {
+/*#circle {
 	background: rgb(0,0,0);
 	width: 20px;
 	height: 20px;
@@ -20,7 +20,7 @@ body {
 	position: absolute;
 	left: 20px;
 	top: 80px;
-}
+}*/
 
 #leds-pc {
 }
@@ -29,8 +29,9 @@ body {
 visibility: hidden;
 }
 
-#leds-slider {
+
+/*#leds-slider {
 	position: absolute;
 	left: 45px;
 	top: 78px;
-}
+}*/

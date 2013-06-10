@@ -1,5 +1,6 @@
 
 var brightness_value=0;
+var brightness_mem=0;
 var io=1;
 
 //COMMUNICATION WITH XMLRPC_C++-SERVER
@@ -43,7 +44,7 @@ function request(method) {
 
 	var serial_dom = new XMLSerializer().serializeToString(dom);
 	//console.log(serial_dom);
-	xmlhttp.open("POST","http://192.168.0.17/marbles-server",false);
+	xmlhttp.open("POST","http://192.168.100.125/marbles-server",false);
 	xmlhttp.setRequestHeader("Content-Type","text/xml");
 	xmlhttp.upload.addEventListener("error",function(){alert("something went wrong uploading the request");},false);
 	xmlhttp.send(serial_dom);
@@ -61,46 +62,29 @@ function request(method) {
 
 //GLOBAL
 function brightness(element) {
-    if( element == 'slider' ) {
+    /*if( element == 'slider' ) {
 		value = parseInt(document.getElementById("leds-slider").value);
 		slider_number = document.getElementById("slider-number");
 		slider_number.innerHTML = value;
 		color= Math.abs(value-255);
 		slider_number.style.color = "rgb("+color+","+color+","+color+")";
+	}*/
+	if( element == 'slider' ) {
+	    value = parseInt(document.getElementById("slider-0").value);
+	    value = parseInt(document.getElementById("leds-slider").value);
 	}
-	else if( element == 'number' ) {
-	    value = parseInt(document.getElementById("leds-number").value);
-	}
-	circle = document.getElementById("circle");
-	size=value/15+20;
-	circle.style.width = size+"px";
-	circle.style.height = size+"px";
-	circle.style.background = "rgb(0,0,"+value+")";
+	//circle = document.getElementById("circle");
+	//size=value/15+20;
+	//circle.style.width = size+"px";
+	//circle.style.height = size+"px";
+	//circle.style.background = "rgb(0,0,"+value+")";
 	brightness_value = value;
 	request('brightness');
+	console.log(brightness_value);
 	
 }
 
-function bulbs(bulb_number) {
-    image = document.getElementById("bulb"+bulb_number);
-	number=parseInt(bulb_number);
-	if( image.src.match("img/lightbulb-off.png") ) {
-	    for(i=number;i>0;i--) {
-		    image_tmp=document.getElementById("bulb"+i);
-		    image_tmp.src = "img/lightbulb-on.png";
-		}
-		brightness_value = 20*number;
-		request('brightness');
-	}
-	else {
-	    for(i=number;i<=5;i++) {
-		    image_tmp=document.getElementById("bulb"+i);
-	        image_tmp.src = "img/lightbulb-off.png";
-		}
-		brightness_value=20*(number-1);
-		request('brightness');
-	}
-}
+
 
 function IO() {
     image = document.getElementById("on-off");
@@ -108,10 +92,19 @@ function IO() {
 	    image.src = "img/bioreactor-off.png";
 		io = 0;
 		request('io.measure');
+		document.getElementById('slider-0').value=0;
+		document.getElementById('leds-slider').value=0;
+		brightness_mem=brightness_value;
+		brightness_value=0;
+		request('brightness');
     }
 	else {
 	    image.src = "img/bioreactor-on.png";
 		io = 1;
 		request('io.measure');
+		brightness_value=brightness_mem;
+		document.getElementById('slider-0').value=brightness_value;
+		document.getElementById('leds-slider').value=brightness_value;
+		request('brightness');
 	}
 }

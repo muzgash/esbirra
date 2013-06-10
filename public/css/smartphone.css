@@ -1,16 +1,10 @@
 body {
-    /*background-image: url('../img/background.jpg');
-	background-size: 1099px 900px;*/
 	background-color: #00CC33;
 }
 
 
 #slider-number {
     visibility: hidden;
-    color: white;
-	position: absolute;
-	left: 10px;
-	top: 10px;
 }
 
 #leds-pc {
