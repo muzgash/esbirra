@@ -1,5 +1,4 @@
-#include<IOMeasure.hpp>
-#include<Brightness.hpp>
+#include<Control.hpp>
 
 using namespace std;
 
@@ -8,11 +7,9 @@ int main(int argc,char** argv) {
     try {
         xmlrpc_c::registry registry;
 
-        xmlrpc_c::methodPtr const pBrightness(new Brightness);
-        xmlrpc_c::methodPtr const pIOMeasure(new IOMeasure);
+        xmlrpc_c::methodPtr const pControl(new Control);
 
-        registry.addMethod("brightness", pBrightness);
-        registry.addMethod("io.measure", pIOMeasure);
+        registry.addMethod("control", pControl);
         
 		cout<<"xmlrpc_c server running on port pi"<<endl;
         xmlrpc_c::serverAbyss server(

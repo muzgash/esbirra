@@ -1,7 +1,7 @@
 marbles
 =======
 
-**M**arvellous **A**rduino and **R**aspberryPi **B**ioreactor **L**ight **E**lectronic **S**ystem
+**M**arvellous **A**DC and **R**aspberryPi **B**ioreactor **L**ight **E**lectronic **S**ystem
 
 Note about configuration on server side:
 Must enable proxy_http module on apache with the command

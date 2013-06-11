@@ -35,29 +35,44 @@ function request(method) {
 	//  	</param>
 	//	</params>
 	//</methodCall>
-	method_name_tag.appendChild(dom.createTextNode(method));
+	method_name_tag.appendChild(dom.createTextNode("control"));
 	method_tag.appendChild(method_name_tag);
 	params_tag = dom.createElement("params");
+	params_tag.appendChild(addParam(dom,"string",method))
 	if( method == "brightness" ) params_tag.appendChild(addParam(dom,"int",brightness_value));
-	if( method == "io.measure" ) params_tag.appendChild(addParam(dom,"int",io));
+	else if( method == "measure" ) params_tag.appendChild(addParam(dom,"int",io));
+	else if( method == "status-brightness" ) params_tag.appendChild(addParam(dom,"int",0));
+	else if( method == "status-biomass" ) params_tag.appendChild(addParam(dom,"int",0));
 	method_tag.appendChild(params_tag);
 
 	var serial_dom = new XMLSerializer().serializeToString(dom);
 	//console.log(serial_dom);
-	xmlhttp.open("POST","http://192.168.100.125/marbles-server",false);
+	xmlhttp.open("POST","http://192.168.0.17/marbles-server",false);
 	xmlhttp.setRequestHeader("Content-Type","text/xml");
 	xmlhttp.upload.addEventListener("error",function(){alert("something went wrong uploading the request");},false);
 	xmlhttp.send(serial_dom);
 
 	if( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
-		var response = new XMLSerializer().serializeToString(xmlhttp.responseXML);
+		var response = xmlhttp.responseXML;
 		//console.log(response);
 
-		//DO SOMETHING WIHT THE INFORMATION
+		//DO SOMETHING WITH THE INFORMATION
+		return response;
 	}
 	else if( xmlhttp.status == 503 ) alert("Couldn't connect to server");
 	else console.log("Ready State = "+xmlhttp.readyState+" and status = "+xmlhttp.status);
     if( xmlhttp.readyState == 3 ) console.log("statusText: " + xmlhttp.statusText + "\nHTTP status code: " + xmlhttp.status);
+}
+
+function init() {
+    response = request("status-brightness");
+	brightness_tag_val = response.getElementsByTagName("value")[0].childNodes[0].textContent;
+	document.getElementById("slider-0").value = brightness_tag_val;
+	document.getElementById("leds-slider").value = brightness_tag_val;
+
+	response = request("status-biomass");
+	biomass_tab_val = response.getElementsByTagName("value")[0].childNodes[0].textContent;
+	document.getElementById("biomass").innerHTML=biomass_tab_val;
 }
 
 //GLOBAL
@@ -80,7 +95,7 @@ function brightness(element) {
 	//circle.style.background = "rgb(0,0,"+value+")";
 	brightness_value = value;
 	request('brightness');
-	console.log(brightness_value);
+	//console.log(brightness_value);
 	
 }
 
@@ -88,23 +103,8 @@ function brightness(element) {
 
 function IO() {
     image = document.getElementById("on-off");
-	if( image.src.match("img/bioreactor-on") ) {
-	    image.src = "img/bioreactor-off.png";
-		io = 0;
-		request('io.measure');
-		document.getElementById('slider-0').value=0;
-		document.getElementById('leds-slider').value=0;
-		brightness_mem=brightness_value;
-		brightness_value=0;
-		request('brightness');
-    }
-	else {
-	    image.src = "img/bioreactor-on.png";
-		io = 1;
-		request('io.measure');
-		brightness_value=brightness_mem;
-		document.getElementById('slider-0').value=brightness_value;
-		document.getElementById('leds-slider').value=brightness_value;
-		request('brightness');
-	}
+    io=0;
+	response=request('measure');
+	biomass_tab_val = response.getElementsByTagName("value")[0].childNodes[0].textContent;
+	document.getElementById("biomass").innerHTML=biomass_tab_val;
 }
